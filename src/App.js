@@ -1,25 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import CreateurPersonnage from "./Containers/CreateurPersonnage/CreateurPersonnage";
+import ListePersonnage from "./Containers/ListePersonnage/ListePersonnage";
+import Titre from "./Components/Titre/Titre";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+class App extends Component {
+    state = {
+        refresh: false
+    }
+
+    handleRefresh = () => {
+        this.setState((oldState) => {
+            return {
+                refresh: !oldState.refresh
+            }
+        });
+    }
+    render() {
+        return (
+            <div className="container">
+                <Titre>Créateur de personnage</Titre>
+                <CreateurPersonnage refresh={this.handleRefresh} />
+                <ListePersonnage refresh={this.state.refresh} />
+            </div>
+        );
+    }
 }
 
 export default App;
